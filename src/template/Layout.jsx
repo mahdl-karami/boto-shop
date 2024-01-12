@@ -1,11 +1,14 @@
 // Import Libraryes
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Header from "../modules/Header";
+import Footer from "../modules/Footer";
 
 export default function Layout() {
 	return (
-        <div>
-            Layout
-            <Outlet />
-        </div>
-    )
+		<>
+			<Header />
+			<Outlet />
+			<Footer />
+		</>
+	);
 }

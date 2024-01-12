@@ -1,0 +1,17 @@
+.layout {
+	width: 100%;
+	padding: 0.4rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #6433ff;
+	margin: 0.5rem auto;
+	border-radius: 10px;
+	color: #fff;
+	button,
+	button > a {
+		font-size: 1.7rem;
+		background: #fff;
+		color: #6433ff;
+	}
+}

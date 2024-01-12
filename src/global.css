@@ -14,7 +14,7 @@
 	-moz-osx-font-smoothing: grayscale;
 
 	/* Varrables and Values */
-	--linkColor: #000;
+	--linkColor: #fff;
 }
 * {
 	margin: 0;
@@ -37,12 +37,13 @@ a {
 }
 button {
 	border-radius: 5px;
-	padding: 0.4em 0.8em;
+	padding: 0.3rem 0.6rem;
 	font-size: 1em;
 	font-weight: 600;
 	font-family: inherit;
 	cursor: pointer;
-  text-transform: capitalize;
+	text-transform: capitalize;
+	background: transparent;
 }
 
 /* Elements Hover */
