@@ -1,20 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// Import Libraryes
-import { useEffect } from "react";
-import API from "../services/AxiosConfig";
+// Import Hooks
+import { useContext } from "react";
 
-export default function Products({ dispatch, data }) {
-	useEffect(() => {
-		const getProducts = async () => {
-			// Fetching API By Axios From AxiosConfig.js
-			const res = await API.get("/products");
-			dispatch({ type: "fetchAPI", payload: res });
-		};
-		getProducts();
-	}, []);
+// Import Modules
+import { ProductsContext } from "../context/ProductsContext";
+
+export default function Products() {
+	const Context = useContext(ProductsContext);
 	return (
 		<div>
-			<button onClick={() => console.log(data)}>Log API Response</button>
+			<button onClick={() => console.log(Context.data)}>Log API Response</button>
 		</div>
 	);
 }
