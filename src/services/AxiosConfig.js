@@ -1,3 +1,9 @@
-import axios from 'axios'
+import axios from "axios";
 
-export const API =  axios.create({baseURL : 'https://fakestoreapi.com'})
+const API = axios.create({ baseURL: "https://fakestoreapi.com" });
+API.interceptors.response.use(
+	(res) => res.data,
+	(err) => Promise.reject(err)
+);
+
+export default API;
