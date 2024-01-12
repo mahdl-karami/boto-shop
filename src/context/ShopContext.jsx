@@ -7,17 +7,21 @@ import { useEffect } from "react";
 import API from "../services/AxiosConfig";
 
 // Create Context
-export const ProductsContext = React.createContext();
+export const ShopContext = React.createContext();
 
 // Set Reducer Values
 const initialState = {
 	isLoading: true,
 	products: [],
+	search: "",
+	category: "all",
 };
 const reducer = (data, { payload, type }) => {
 	switch (type) {
 		case "fetchAPI":
 			return { ...data, products: payload };
+		case "setSearchValue":
+			return { ...data, search: payload };
 	}
 };
 
@@ -31,5 +35,5 @@ export default function ContextProvider({ children }) {
 		getProducts();
 	}, []);
 	const [data, dispatch] = useReducer(reducer, initialState);
-	return <ProductsContext.Provider value={{ data, dispatch }}>{children}</ProductsContext.Provider>;
+	return <ShopContext.Provider value={{ data, dispatch }}>{children}</ShopContext.Provider>;
 }

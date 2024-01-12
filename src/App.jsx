@@ -7,7 +7,7 @@ import Cart from "./pages/Cart";
 import NoPage from "./pages/NoPage";
 import ProductDetailes from "./pages/ProductDetailes";
 // Import Contexts
-import ContextProvider from "./context/ProductsContext";
+import ContextProvider from "./context/ShopContext";
 
 export default function App() {
 	return (
