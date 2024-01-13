@@ -12,7 +12,7 @@ export default function ProductCard({ product: { title, image, price, id } }) {
 			<div style={{ textAlign: "center" }}>
 				<img src={image} alt="Product Image" />
 			</div>
-			<h3>{title.split(" ").slice(0, 3)}</h3>
+			<h3>{title.split(" ").slice(0, 3).join(" ")}</h3>
 			<h5>{price} $</h5>
 			<div className={styles.icons}>
 				<button>
@@ -27,5 +27,3 @@ export default function ProductCard({ product: { title, image, price, id } }) {
 		</div>
 	);
 }
-
-// {title.split(" ").slice(0, 3)}
