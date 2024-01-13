@@ -1,4 +1,4 @@
-// Import Styles
+// Import Modules
 import styles from "../styles/layout.module.css";
 
 export default function Footer() {

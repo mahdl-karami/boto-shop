@@ -1,33 +1,30 @@
 // Import Hooks
-import React, { useReducer } from "react";
-import { useEffect } from "react";
+import React, { useReducer, useEffect, useContext } from "react";
 
 // Import Modules
 import API from "../services/AxiosConfig";
-import { useSearchParams } from "react-router-dom";
 
 // Create Context
-export const ShopContext = React.createContext();
+const ShopContext = React.createContext(); // For Use   --->   Cosum Hook Created (useShopContext)
 
-// Set Reducer Values
+// Set Reducer InitialState & Reducer Function
 const initialState = {
 	isLoading: true,
 	products: [],
-	search: "",
+	searchedProducts: [],
+	search: '',
 	category: "all",
-	searchParams: "",
-	setSearchParams: "",
 };
 const reducer = (data, { payload, type }) => {
 	switch (type) {
 		case "fetchAPI":
 			return { ...data, products: payload, isLoading: false };
-		case "setSearchValue":
+		case "changeLoadingStatus":
+			return { ...data, isLoading: payload };
+		case "setSearch":
 			return { ...data, search: payload.trimStart() };
-		case "filter":
+		case "setCategory":
 			return { ...data, category: payload };
-		case "useSearchParams":
-			return { ...data, searchParams: payload.searchParams, setSearchParams: payload.setSearchParams };
 		default:
 			console.log("Invalid Action");
 			return { ...data };
@@ -35,17 +32,22 @@ const reducer = (data, { payload, type }) => {
 };
 
 export default function ContextProvider({ children }) {
-	const [searchParams, setSearchParams] = useSearchParams();
-
 	useEffect(() => {
 		const getProducts = async () => {
 			// Fetching API By Axios From AxiosConfig.js
-			const res = await API.get("/products");
-			dispatch({ type: "fetchAPI", payload: res });
+			dispatch({ type: "fetchAPI", payload: await API.get("/products") });
 		};
 		getProducts();
-		dispatch({ type: "useSearchParams", payload: { searchParams, setSearchParams } });
 	}, []);
+	// Set Reducer Hook In ContextProvider
 	const [data, dispatch] = useReducer(reducer, initialState);
+
 	return <ShopContext.Provider value={{ data, dispatch }}>{children}</ShopContext.Provider>;
 }
+
+// Costum Hook For Context Using
+// eslint-disable-next-line react-refresh/only-export-components
+export const useShopContext = () => {
+	const context = useContext(ShopContext);
+	return context;
+};

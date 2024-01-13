@@ -1,15 +1,21 @@
-// Import Hooks & Context
-import { useContext } from "react";
-import { ShopContext } from "../context/ShopContext";
-// Import Style Mudoles & Icons
+// Import Hooks
+import { useShopContext } from "../context/ShopContext";
+
+// Import Modules
 import styles from "../styles/searchBar.module.css";
+
+// Import Lybaries
 import { FiSearch } from "react-icons/fi";
 
 export default function SearchBar() {
-	const { data, dispatch } = useContext(ShopContext);
+	const {
+		data: { search },
+		dispatch,
+	} = useShopContext();
+
 	return (
 		<div className={styles.searchBar} style={{ margin: "2rem 0" }}>
-			<input placeholder="Search Here" value={data.search} onChange={({ target }) => dispatch({ type: "setSearchValue", payload: target.value })} />
+			<input placeholder="Search Here" value={search} onChange={({ target }) => dispatch({ type: "setSearchValue", payload: target.value })} />
 			<button>
 				<FiSearch />
 			</button>

@@ -1,8 +1,8 @@
-// Import Libraris
-import { Link } from "react-router-dom";
 // Import Modules
 import styles from "../styles/card.module.css";
-// Import Icons
+import { Link } from "react-router-dom";
+
+// Import Lybraries
 import { BiCartAdd } from "react-icons/bi";
 import { TbListDetails } from "react-icons/tb";
 
@@ -15,11 +15,11 @@ export default function ProductCard({ product: { title, image, price, id } }) {
 			<h3>{title.split(" ").slice(0, 3).join(" ")}</h3>
 			<h5>{price} $</h5>
 			<div className={styles.icons}>
-				<button>
-					<Link to={`/products/${id}`}>
+				<Link to={`/products/${id}`}>
+					<button>
 						<TbListDetails />
-					</Link>
-				</button>
+					</button>
+				</Link>
 				<button>
 					<BiCartAdd />
 				</button>

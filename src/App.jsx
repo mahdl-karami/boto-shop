@@ -1,17 +1,18 @@
 // Import Libraryes
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 // Import Pages
 import Layout from "./template/Layout";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import NoPage from "./pages/NoPage";
 import ProductDetails from "./pages/ProductDetails";
-// Import Contexts
+// Import ContextsProvider
 import ContextProvider from "./context/ShopContext";
 
 export default function App() {
 	return (
-		<BrowserRouter>
+		<Router>
+			{/* Wrapping Context To Routs */}
 			<ContextProvider>
 				<Routes>
 					<Route path="/" element={<Layout />}>
@@ -23,6 +24,6 @@ export default function App() {
 					</Route>
 				</Routes>
 			</ContextProvider>
-		</BrowserRouter>
+		</Router>
 	);
 }

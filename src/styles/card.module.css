@@ -20,10 +20,8 @@
 		border-radius: 5px;
 		background: #6433ff;
 		color: #fff;
-		a {
-			color: #6433ff;
-		}
 		&:nth-child(1) {
+			color: #6433ff;
 			background: #fff;
 		}
 	}

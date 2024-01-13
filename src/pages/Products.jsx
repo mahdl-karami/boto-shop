@@ -1,59 +1,38 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // Import Components
 import SearchBar from "../components/SearchBar";
 import ProductCard from "../components/ProductCard";
+import Categoris from "../components/Categoris";
 
 // Import Hooks
-import { useContext } from "react";
+import { useShopContext } from "../context/ShopContext";
 
 // Import Libraris
-import { TbCategory } from "react-icons/tb";
 import { RotatingLines } from "react-loader-spinner";
 
 // Import Modules
-import { ShopContext } from "../context/ShopContext";
 import styles from "../styles/products.module.css";
 
 export default function Products() {
 	const {
-		data: { products, isLoading, searchParams, setSearchParams },
-	} = useContext(ShopContext);
-	// Functions
-	const filteringHandler = ({ target: { innerText, tagName } }) => {
-		if (tagName !== "LI") {
-			return;
-		}
-		setSearchParams({ category: innerText.toLowerCase() });
-	};
+		data: { products, isLoading },
+	} = useShopContext();
+
 	return (
 		<>
 			<SearchBar />
 			<div className={styles.products}>
-				{isLoading ? (
-					<div className={styles.loading}>
-						<RotatingLines visible={true} height="200" width="200" color="grey" strokeWidth="5" strokeColor="#6433ff" animationDuration="0.75" ariaLabel="rotating-lines-loading" />
-					</div>
-				) : (
-					<div className={styles.productsList}>
-						{products.map((product) => (
-							<ProductCard key={product.id} product={product} />
-						))}
-					</div>
-				)}
-				<div className={styles.category}>
-					<span>
-						<TbCategory />
-						<p onClick={() => console.log(searchParams.toString())}>Categoris</p>
-					</span>
-					<ul onClick={filteringHandler}>
-						<li>All</li>
-						<li>Electronics</li>
-						<li>Jewelery</li>
-						<li>{"Men's Clothing"}</li>
-						<li>{"Women's Clothing"}</li>
-					</ul>
+				<div className={isLoading ? styles.loading : styles.none}>
+					<RotatingLines visible={isLoading} height="200" width="200" color="grey" strokeWidth="5" strokeColor="#6433ff" animationDuration="0.75" ariaLabel="rotating-lines-loading" />
 				</div>
+				<div className={isLoading ? styles.none : styles.productsList}>
+					{products.map((product) => (
+						<ProductCard key={product.id} product={product} />
+					))}
+				</div>
+				<Categoris />
 			</div>
 		</>
 	);

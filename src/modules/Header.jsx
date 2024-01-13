@@ -1,6 +1,6 @@
-// Import Styles
+// Import Modules
 import styles from "../styles/layout.module.css";
-// Import From Libraryes
+// Import Lybraries
 import { FaOpencart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
