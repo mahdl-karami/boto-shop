@@ -19,7 +19,7 @@ const initialState = {
 const reducer = (data, { payload, type }) => {
 	switch (type) {
 		case "fetchAPI":
-			return { ...data, products: payload };
+			return { ...data, products: payload, isLoading: false };
 		case "setSearchValue":
 			return { ...data, search: payload };
 	}

@@ -15,24 +15,23 @@ import { RotatingLines } from "react-loader-spinner";
 
 export default function Products() {
 	const {
-		data: { products },
+		data: { products, isLoading },
 	} = useContext(ShopContext);
 	return (
 		<>
 			<SearchBar />
 			<div className={styles.products}>
-				{products.length ? (
+				{isLoading ? (
+					<div className={styles.loading}>
+						<RotatingLines visible={true} height="200" width="200" color="grey" strokeWidth="5" strokeColor="#6433ff" animationDuration="0.75" ariaLabel="rotating-lines-loading" />
+					</div>
+				) : (
 					<div className={styles.productsList}>
 						{products.map((product) => (
 							<ProductCard key={product.id} product={product} />
 						))}
 					</div>
-				) : (
-					<div className={styles.loading}>
-						<RotatingLines visible={true} height="200" width="200" color="grey" strokeWidth="5" strokeColor="#6433ff" animationDuration="0.75" ariaLabel="rotating-lines-loading"  />
-					</div>
 				)}
-
 				<div className={styles.category}>
 					<span>
 						<TbCategory />
