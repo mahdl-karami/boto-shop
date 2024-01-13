@@ -1,29 +1,35 @@
-.card{
-    background: #fff;
-    border: dashed 2px #ccc;
-    border-radius: 10px;
-    padding: .5rem 1rem;
-    img{
-        width: 170px;
-        height: 170px;
-        margin-bottom: 1rem;
-    }
-    h3 {
-        color: #6433ff;
-    }
-    h5{
-        color: #555555;
-        margin: .4rem ;
-    }
-    button{
-        font-size: 1.4em;
+.card {
+	background: #fff;
+	border: dashed 2px #ccc;
+	border-radius: 10px;
+	padding: 0.5rem 1rem;
+	img {
+		width: 170px;
+		height: 170px;
+		margin-bottom: 1rem;
+	}
+	h3 {
+		color: #6433ff;
+	}
+	h5 {
+		color: #555555;
+		margin: 0.4rem;
+	}
+	button {
+		font-size: 1.4em;
 		border-radius: 5px;
-		background:  #6433ff;
-        color: #fff;
-    }
+		background: #6433ff;
+		color: #fff;
+		a {
+			color: #6433ff;
+		}
+		&:nth-child(1) {
+			background: #fff;
+		}
+	}
 }
-.icons{
-    display: flex;
-    justify-content: space-between;
-    padding: .3rem  0  ;
+.icons {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.3rem 0;
 }

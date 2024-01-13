@@ -21,7 +21,7 @@ const reducer = (data, { payload, type }) => {
 		case "fetchAPI":
 			return { ...data, products: payload, isLoading: false };
 		case "setSearchValue":
-			return { ...data, search: payload };
+			return { ...data, search: payload.trimStart() };
 		case "filter":
 			return { ...data, category: payload };
 		default:
