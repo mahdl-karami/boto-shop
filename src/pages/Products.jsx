@@ -8,13 +8,37 @@ import { useContext } from "react";
 
 // Import Modules
 import { ShopContext } from "../context/ShopContext";
+import ProductCard from "../components/ProductCard";
+import styles from "../styles/products.module.css";
+import { TbCategory } from "react-icons/tb";
 
 export default function Products() {
-	const { data } = useContext(ShopContext);
+	const {
+		data: { products },
+	} = useContext(ShopContext);
 	return (
-		<div>
+		<>
 			<SearchBar />
-			<button onClick={() => console.log(data)}>Log API Response</button>
-		</div>
+			<div className={styles.products}>
+				<div className={styles.productsList}>
+					{products.map((product) => (
+						<ProductCard key={product.id} product={product} />
+					))}
+				</div>
+				<div className={styles.category}>
+						<span>
+							<TbCategory />
+							<p>Categoris</p>
+						</span>
+						<ul>
+							<li>All</li>
+							<li>Electronics</li>
+							<li>Jewelery</li>
+							<li>{"men's"}</li>
+							<li>{"women's"}</li>
+						</ul>
+				</div>
+			</div>
+		</>
 	);
 }

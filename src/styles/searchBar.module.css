@@ -14,7 +14,7 @@
 	input,
 	button {
 		font-size: 1.4em;
-		border-radius: 10px;
+		border-radius: 5px;
 		border: dashed 3px #6433ff;
 	}
 }
