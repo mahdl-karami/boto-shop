@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	min-height: 100vh;
+	margin-top: 2rem;
+}
+.image {
+	width: 26%;
+	background: #fff;
+	border: dashed 2px #6433ff;
+	border-radius: 10px;
+	padding: 2rem;
+	height: min-content;
+}
+.details {
+	width: 70%;
+	background: #fff;
+	border: dashed 2px #ccc;
+	border-radius: 10px;
+	padding: 2rem;
+	height: min-content;
+	h3 {
+		color: #6433ff;
+	}
+	p {
+		margin: 2rem 0;
+		opacity: 60%;
+		font-size: 1.1rem;
+		font-weight: 500;
+		letter-spacing: 1.2;
+		word-spacing: 1.4;
+	}
+}
+
+.datailsFooter {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+    text-transform: capitalize;
+    align-items: end;
+	span > div {
+		display: flex;
+        align-items: center;
+        font-size: 1.2em;
+        padding: .2rem 0;
+	}
+    svg{
+        color: #6433ff;
+        margin-right: .6rem;
+    }
+    button{
+        background: #6433ff;
+        color: #fff;
+    }
+}

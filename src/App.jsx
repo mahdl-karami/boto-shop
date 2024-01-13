@@ -5,7 +5,7 @@ import Layout from "./template/Layout";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import NoPage from "./pages/NoPage";
-import ProductDetailes from "./pages/ProductDetailes";
+import ProductDetails from "./pages/ProductDetails";
 // Import Contexts
 import ContextProvider from "./context/ShopContext";
 
@@ -17,7 +17,7 @@ export default function App() {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Navigate to="/products" />} />
 						<Route path="/products" element={<Products />} />
-						<Route path="/products/:id" element={<ProductDetailes />} />
+						<Route path="/products/:id" element={<ProductDetails />} />
 						<Route path="/cart" element={<Cart />} />
 						<Route path="/*" element={<NoPage />} />
 					</Route>
