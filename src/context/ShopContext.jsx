@@ -1,10 +1,10 @@
-import React from "react";
 // Import Hooks
-import { useReducer } from "react";
+import React, { useReducer } from "react";
 import { useEffect } from "react";
 
 // Import Modules
 import API from "../services/AxiosConfig";
+import { useSearchParams } from "react-router-dom";
 
 // Create Context
 export const ShopContext = React.createContext();
@@ -15,6 +15,8 @@ const initialState = {
 	products: [],
 	search: "",
 	category: "all",
+	searchParams: "",
+	setSearchParams: "",
 };
 const reducer = (data, { payload, type }) => {
 	switch (type) {
@@ -24,6 +26,8 @@ const reducer = (data, { payload, type }) => {
 			return { ...data, search: payload.trimStart() };
 		case "filter":
 			return { ...data, category: payload };
+		case "useSearchParams":
+			return { ...data, searchParams: payload.searchParams, setSearchParams: payload.setSearchParams };
 		default:
 			console.log("Invalid Action");
 			return { ...data };
@@ -31,6 +35,8 @@ const reducer = (data, { payload, type }) => {
 };
 
 export default function ContextProvider({ children }) {
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	useEffect(() => {
 		const getProducts = async () => {
 			// Fetching API By Axios From AxiosConfig.js
@@ -38,6 +44,7 @@ export default function ContextProvider({ children }) {
 			dispatch({ type: "fetchAPI", payload: res });
 		};
 		getProducts();
+		dispatch({ type: "useSearchParams", payload: { searchParams, setSearchParams } });
 	}, []);
 	const [data, dispatch] = useReducer(reducer, initialState);
 	return <ShopContext.Provider value={{ data, dispatch }}>{children}</ShopContext.Provider>;

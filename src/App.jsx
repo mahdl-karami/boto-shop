@@ -11,8 +11,8 @@ import ContextProvider from "./context/ShopContext";
 
 export default function App() {
 	return (
-		<ContextProvider>
-			<BrowserRouter>
+		<BrowserRouter>
+			<ContextProvider>
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Navigate to="/products" />} />
@@ -22,7 +22,7 @@ export default function App() {
 						<Route path="/*" element={<NoPage />} />
 					</Route>
 				</Routes>
-			</BrowserRouter>
-		</ContextProvider>
+			</ContextProvider>
+		</BrowserRouter>
 	);
 }

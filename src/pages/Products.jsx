@@ -17,15 +17,15 @@ import styles from "../styles/products.module.css";
 
 export default function Products() {
 	const {
-		data: { products, isLoading } , dispatch
+		data: { products, isLoading, searchParams, setSearchParams },
 	} = useContext(ShopContext);
-	
 	// Functions
-	const filteringHandler = ({target:{innerText , tagName}})=>{
-		if (tagName !== "LI") {return}
-		dispatch({ type: "filter", payload: innerText.toLowerCase() });
-	}
-
+	const filteringHandler = ({ target: { innerText, tagName } }) => {
+		if (tagName !== "LI") {
+			return;
+		}
+		setSearchParams({ category: innerText.toLowerCase() });
+	};
 	return (
 		<>
 			<SearchBar />
@@ -44,7 +44,7 @@ export default function Products() {
 				<div className={styles.category}>
 					<span>
 						<TbCategory />
-						<p>Categoris</p>
+						<p onClick={() => console.log(searchParams.toString())}>Categoris</p>
 					</span>
 					<ul onClick={filteringHandler}>
 						<li>All</li>
