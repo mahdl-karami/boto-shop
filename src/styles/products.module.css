@@ -32,20 +32,21 @@
 	span {
 		display: flex;
 		align-items: center;
-        margin-bottom: 1rem;
+		margin-bottom: 1rem;
 	}
-    li{
-        padding: .1rem .4rem;
-        cursor: pointer;
-        &:hover{
-            opacity: 70%;
-        }
-    }
+	li {
+		padding: 0.1rem 0.4rem;
+		cursor: pointer;
+		color: #474747;
+		&:hover {
+			color: #6433ff;
+		}
+	}
 }
-.loading{
-    width: 78%;
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.loading {
+	width: 78%;
+	height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

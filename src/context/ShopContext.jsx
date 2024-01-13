@@ -22,6 +22,11 @@ const reducer = (data, { payload, type }) => {
 			return { ...data, products: payload, isLoading: false };
 		case "setSearchValue":
 			return { ...data, search: payload };
+		case "filter":
+			return { ...data, category: payload };
+		default:
+			console.log("Invalid Action");
+			return { ...data };
 	}
 };
 

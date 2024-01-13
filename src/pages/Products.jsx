@@ -2,21 +2,30 @@
 
 // Import Components
 import SearchBar from "../components/SearchBar";
+import ProductCard from "../components/ProductCard";
 
 // Import Hooks
 import { useContext } from "react";
 
-// Import Modules
-import { ShopContext } from "../context/ShopContext";
-import ProductCard from "../components/ProductCard";
-import styles from "../styles/products.module.css";
+// Import Libraris
 import { TbCategory } from "react-icons/tb";
 import { RotatingLines } from "react-loader-spinner";
 
+// Import Modules
+import { ShopContext } from "../context/ShopContext";
+import styles from "../styles/products.module.css";
+
 export default function Products() {
 	const {
-		data: { products, isLoading },
+		data: { products, isLoading } , dispatch
 	} = useContext(ShopContext);
+	
+	// Functions
+	const filteringHandler = ({target:{innerText , tagName}})=>{
+		if (tagName !== "LI") {return}
+		dispatch({ type: "filter", payload: innerText.toLowerCase() });
+	}
+
 	return (
 		<>
 			<SearchBar />
@@ -37,12 +46,12 @@ export default function Products() {
 						<TbCategory />
 						<p>Categoris</p>
 					</span>
-					<ul>
+					<ul onClick={filteringHandler}>
 						<li>All</li>
 						<li>Electronics</li>
 						<li>Jewelery</li>
-						<li>{"men's"}</li>
-						<li>{"women's"}</li>
+						<li>{"Men's Clothing"}</li>
+						<li>{"Women's Clothing"}</li>
 					</ul>
 				</div>
 			</div>
