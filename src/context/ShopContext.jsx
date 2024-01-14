@@ -12,7 +12,7 @@ const initialState = {
 	isLoading: true,
 	products: [],
 	searchedProducts: [],
-	search: '',
+	search: "",
 	category: "all",
 };
 const reducer = (data, { payload, type }) => {
@@ -35,7 +35,12 @@ export default function ContextProvider({ children }) {
 	useEffect(() => {
 		const getProducts = async () => {
 			// Fetching API By Axios From AxiosConfig.js
-			dispatch({ type: "fetchAPI", payload: await API.get("/products") });
+			try {
+				dispatch({ type: "fetchAPI", payload: await API.get("/products") });
+			} catch (error) {
+				dispatch({ type: "changeLoadingStatus", payload: false });
+				console.log(error.message);
+			}
 		};
 		getProducts();
 	}, []);
