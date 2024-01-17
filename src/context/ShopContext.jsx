@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-case-declarations */
 // Import Hooks
 import React, { useReducer, useEffect, useContext } from "react";
+import { useSearchParams } from "react-router-dom";
 
 // Import Modules
 import API from "../services/AxiosConfig";
 import { filter } from "../Helpers/Filtering";
+import { cleaner } from "../Helpers/QueryCleaner";
 
 // Create Context
 const ShopContext = React.createContext(); // For Use   --->   Cosum Hook Created (useShopContext)
@@ -42,6 +45,9 @@ const reducer = (data, { payload, type }) => {
 export default function ContextProvider({ children }) {
 	// Set Reducer Hook In ContextProvider
 	const [data, dispatch] = useReducer(reducer, initialState);
+	// Set URL Parametters
+	// eslint-disable-next-line no-unused-vars
+	const [searchParams, setSearchParams] = useSearchParams();
 	// Fetching SideEffect ...
 	useEffect(() => {
 		const getProducts = async () => {
@@ -55,9 +61,12 @@ export default function ContextProvider({ children }) {
 		};
 		getProducts();
 	}, []);
-	// Filtring Products useEffect ...
+	// Filtering And Updadte URL
 	useEffect(() => {
+		// Filtering
 		dispatch({ type: "filterProducts", payload: data.query });
+		// Update URL
+		setSearchParams(cleaner(data.query));
 	}, [data.query]);
 
 	return <ShopContext.Provider value={{ data, dispatch }}>{children}</ShopContext.Provider>;
