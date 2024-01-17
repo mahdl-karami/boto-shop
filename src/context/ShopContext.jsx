@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 // Import Hooks
 import React, { useReducer, useEffect, useContext } from "react";
 
@@ -11,9 +12,12 @@ const ShopContext = React.createContext(); // For Use   --->   Cosum Hook Create
 const initialState = {
 	isLoading: true,
 	products: [],
-	searchedProducts: [],
+	filteredProducts: [],
 	search: "",
-	category: "all",
+	query: {
+		search: "",
+		category: "all",
+	},
 };
 const reducer = (data, { payload, type }) => {
 	switch (type) {
@@ -23,8 +27,10 @@ const reducer = (data, { payload, type }) => {
 			return { ...data, isLoading: payload };
 		case "setSearch":
 			return { ...data, search: payload.trimStart() };
-		case "setCategory":
-			return { ...data, category: payload };
+		case "setQuery":
+			console.log(data.query);
+			const { name, value } = payload;
+			return { ...data, query: { ...data.query, [name]: value } };
 		default:
 			console.log("Invalid Action");
 			return { ...data };
@@ -32,11 +38,12 @@ const reducer = (data, { payload, type }) => {
 };
 
 export default function ContextProvider({ children }) {
+	// Fetching SideEffect ...
 	useEffect(() => {
 		const getProducts = async () => {
 			// Fetching API By Axios From AxiosConfig.js
 			try {
-				dispatch({ type: "fetchAPI", payload: await API.get("/products") });
+				dispatch({ type: "fetchAPI", payload: await API.get("/pro ducts") });
 			} catch (error) {
 				dispatch({ type: "changeLoadingStatus", payload: false });
 				console.log(error.message);
@@ -44,6 +51,9 @@ export default function ContextProvider({ children }) {
 		};
 		getProducts();
 	}, []);
+	// Filtring Products useEffect ...
+	useEffect(() => {}, []);
+	useContext;
 	// Set Reducer Hook In ContextProvider
 	const [data, dispatch] = useReducer(reducer, initialState);
 

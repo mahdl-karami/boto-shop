@@ -9,7 +9,7 @@ export default function Categoris() {
 		if (tagName !== "LI") {
 			return;
 		}
-		dispatch({ type: "setCategory", payload: innerText.toLowerCase() });
+		dispatch({ type: "setQuery", payload: { name: "category", value: innerText.toLowerCase() } });
 	};
 	return (
 		<div className={styles.category}>

@@ -16,7 +16,7 @@ export default function SearchBar() {
 	return (
 		<div className={styles.searchBar} style={{ margin: "2rem 0" }}>
 			<input placeholder="Search Here" value={search} onChange={({ target }) => dispatch({ type: "setSearch", payload: target.value })} />
-			<button>
+			<button onClick={() => dispatch({ type: "setQuery", payload: {name: "search" , value : search.toLowerCase()} })}>
 				<FiSearch />
 			</button>
 		</div>
