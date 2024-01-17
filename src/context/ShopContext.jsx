@@ -28,7 +28,6 @@ const reducer = (data, { payload, type }) => {
 		case "setSearch":
 			return { ...data, search: payload.trimStart() };
 		case "setQuery":
-			console.log(data.query);
 			const { name, value } = payload;
 			return { ...data, query: { ...data.query, [name]: value } };
 		default:
