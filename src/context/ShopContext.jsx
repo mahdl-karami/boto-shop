@@ -48,7 +48,7 @@ export default function ContextProvider({ children }) {
 	const [searchParams, setSearchParams] = useSearchParams();
 	// Set Reducer Hook In ContextProvider
 	const initialQueries = {
-		search: searchParams.get("search"),
+		search: searchParams.get("search") ? searchParams.get("search") : "",
 		category: searchParams.get("category") ? searchParams.get("category") : "all",
 	};
 	const [data, dispatch] = useReducer(reducer, { ...initialState, query: { ...initialQueries } });
@@ -73,6 +73,7 @@ export default function ContextProvider({ children }) {
 		dispatch({ type: "filterProducts", payload: data.query });
 		// Update URL
 		setSearchParams(cleaner(data.query));
+		dispatch({ type: "setSearch", payload: data.query.search });
 	}, [data.query]);
 
 	return <ShopContext.Provider value={{ data, dispatch }}>{children}</ShopContext.Provider>;
