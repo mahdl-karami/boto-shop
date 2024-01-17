@@ -8,13 +8,13 @@ export default function Header() {
 	return (
 		<header className={styles.layout}>
 			<h1>
-				<Link to="/">BotoShop</Link>
+				<a href="products">BotoShop</a>
 			</h1>
-			<button>
-				<Link to="/cart">
+			<Link to="/cart">
+				<button>
 					<FaOpencart />
-				</Link>
-			</button>
+				</button>
+			</Link>
 		</header>
 	);
 }
