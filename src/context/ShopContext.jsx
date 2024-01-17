@@ -43,17 +43,23 @@ const reducer = (data, { payload, type }) => {
 };
 
 export default function ContextProvider({ children }) {
-	// Set Reducer Hook In ContextProvider
-	const [data, dispatch] = useReducer(reducer, initialState);
 	// Set URL Parametters
 	// eslint-disable-next-line no-unused-vars
 	const [searchParams, setSearchParams] = useSearchParams();
+	// Set Reducer Hook In ContextProvider
+	const initialQueries = {
+		search: searchParams.get("search"),
+		category: searchParams.get("category") ? searchParams.get("category") : "all",
+	};
+	const [data, dispatch] = useReducer(reducer, { ...initialState, query: { ...initialQueries } });
+
 	// Fetching SideEffect ...
 	useEffect(() => {
 		const getProducts = async () => {
 			// Fetching API By Axios From AxiosConfig.js
 			try {
 				dispatch({ type: "fetchAPI", payload: await API.get("/products") });
+				dispatch({ type: "filterProducts" });
 			} catch (error) {
 				dispatch({ type: "changeLoadingStatus", payload: false });
 				console.log(error.message);
