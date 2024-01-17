@@ -17,7 +17,7 @@ import styles from "../styles/products.module.css";
 
 export default function Products() {
 	const {
-		data: { products, isLoading },
+		data: { filteredProducts, isLoading },
 	} = useShopContext();
 
 	return (
@@ -28,7 +28,7 @@ export default function Products() {
 					<RotatingLines visible={isLoading} height="200" width="200" color="grey" strokeWidth="5" strokeColor="#6433ff" animationDuration="0.75" ariaLabel="rotating-lines-loading" />
 				</div>
 				<div className={isLoading ? styles.none : styles.productsList}>
-					{products.map((product) => (
+					{filteredProducts.map((product) => (
 						<ProductCard key={product.id} product={product} />
 					))}
 				</div>

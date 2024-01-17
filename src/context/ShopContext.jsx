@@ -4,6 +4,7 @@ import React, { useReducer, useEffect, useContext } from "react";
 
 // Import Modules
 import API from "../services/AxiosConfig";
+import { filter } from "../Helpers/Filtering";
 
 // Create Context
 const ShopContext = React.createContext(); // For Use   --->   Cosum Hook Created (useShopContext)
@@ -22,7 +23,9 @@ const initialState = {
 const reducer = (data, { payload, type }) => {
 	switch (type) {
 		case "fetchAPI":
-			return { ...data, products: payload, isLoading: false };
+			return { ...data, products: payload, filteredProducts: payload, isLoading: false };
+		case "filterProducts":
+			return { ...data, filteredProducts: filter(data.products, data.query) };
 		case "changeLoadingStatus":
 			return { ...data, isLoading: payload };
 		case "setSearch":
@@ -37,12 +40,14 @@ const reducer = (data, { payload, type }) => {
 };
 
 export default function ContextProvider({ children }) {
+	// Set Reducer Hook In ContextProvider
+	const [data, dispatch] = useReducer(reducer, initialState);
 	// Fetching SideEffect ...
 	useEffect(() => {
 		const getProducts = async () => {
 			// Fetching API By Axios From AxiosConfig.js
 			try {
-				dispatch({ type: "fetchAPI", payload: await API.get("/pro ducts") });
+				dispatch({ type: "fetchAPI", payload: await API.get("/products") });
 			} catch (error) {
 				dispatch({ type: "changeLoadingStatus", payload: false });
 				console.log(error.message);
@@ -51,10 +56,9 @@ export default function ContextProvider({ children }) {
 		getProducts();
 	}, []);
 	// Filtring Products useEffect ...
-	useEffect(() => {}, []);
-	useContext;
-	// Set Reducer Hook In ContextProvider
-	const [data, dispatch] = useReducer(reducer, initialState);
+	useEffect(() => {
+		dispatch({ type: "filterProducts", payload: data.query });
+	}, [data.query]);
 
 	return <ShopContext.Provider value={{ data, dispatch }}>{children}</ShopContext.Provider>;
 }
