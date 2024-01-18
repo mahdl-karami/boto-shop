@@ -14,9 +14,9 @@ import { TbShoppingBagCheck, TbListDetails } from "react-icons/tb";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 export default function ProductCard({ product, product: { title, image, price, id } }) {
-	const [cart, setCart] = useCart();
-	const [count, setCount] = useState(cart[product.id] ? cart[product.id].count : 0);
 	const unicName = `product${id}`;
+	const [cart, setCart] = useCart();
+	const [count, setCount] = useState(cart[unicName] ? cart[unicName].count : 0);
 	useEffect(() => {
 		if (count != 0) {
 			setCart({ type: "changeCart", payload: { id: unicName, value: { ...product, ["count"]: count } } });
