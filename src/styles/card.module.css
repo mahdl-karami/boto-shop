@@ -15,19 +15,31 @@
 		color: #555555;
 		margin: 0.4rem;
 	}
-	button {
-		font-size: 1.4em;
-		border-radius: 5px;
-		background: #6433ff;
-		color: #fff;
-		&:nth-child(1) {
-			color: #6433ff;
-			background: #fff;
-		}
-	}
 }
 .icons {
 	display: flex;
 	justify-content: space-between;
 	padding: 0.3rem 0;
+	button {
+		color: #6433ff;
+		padding: 0.2rem 0.4rem;
+		font-size: 1.4em;
+		border-radius: 5px;
+	}
+}
+.panel {
+	button {
+		background: #6433ff;
+		color: #fff;
+	}
+	p {
+		display: inline;
+		font-size: 1.3rem;
+		color: #6433ff;
+		padding: 0 0.4rem;
+	}
+	div {
+		display: flex;
+		align-items: center;
+	}
 }
