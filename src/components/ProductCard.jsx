@@ -11,9 +11,9 @@ import CardPanel from "./CardPanel";
 export default function ProductCard({ product, product: { title, image, price, id } }) {
 	const [cart, setCart] = useCart(); // Using From Cart Context
 	const unicName = `product${id}`;
-	const [count, setCount] = useState(cart[unicName] ? cart[unicName].count : 0);
+	const [count, setCount] = useState(cart.products[unicName] ? cart.products[unicName].count : 0);
 	const removeHandler = () => {
-		delete cart[unicName];
+		delete cart.products[unicName];
 		setCart({ type: "addToCart", payload: cart });
 	};
 	useEffect(() => {

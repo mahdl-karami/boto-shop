@@ -4,13 +4,14 @@ const CartContext = React.createContext();
 
 const initialState = {
 	quantity: 0,
+	products: {},
 };
 const reducer = (state, { type, payload }) => {
 	switch (type) {
 		case "addToCart":
 			return { ...payload };
 		case "changeCart":
-			return { ...state, [payload.id]: payload.value };
+			return { ...state, products: { ...state.products, [payload.id]: payload.value } };
 		case "changeQuantity":
 			return { ...state };
 		case "increase":
