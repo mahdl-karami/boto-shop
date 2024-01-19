@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 
 const CartContext = React.createContext();
 
@@ -13,11 +13,11 @@ const reducer = (state, { type, payload }) => {
 		case "changeCart":
 			return { ...state, products: { ...state.products, [payload.id]: payload.value } };
 		case "changeQuantity":
-			return { ...state };
-		case "increase":
-			console.log(state);
-			console.log(payload);
-			return [payload];
+			return { ...state, quantity: payload };
+		// case "increase":
+		// 	console.log(state);
+		// 	console.log(payload);
+		// 	return [payload];
 		default:
 			console.log("Invalid Action");
 	}
@@ -25,6 +25,10 @@ const reducer = (state, { type, payload }) => {
 
 export default function CartContextProvider(props) {
 	const [state, dispatch] = useReducer(reducer, initialState);
+	useEffect(() => {
+		const total = Object.entries(state.products).map((item) => item[1].count);
+		dispatch({ type: "changeQuantity", payload: total.reduce((partialSum, a) => partialSum + a, 0) });
+	}, [state.products, Object.keys(state.products).length]);
 	return <CartContext.Provider value={{ state, dispatch }}>{props.children}</CartContext.Provider>;
 }
 // eslint-disable-next-line react-refresh/only-export-components

@@ -25,7 +25,7 @@ export default function ProductCard({ product, product: { title, image, price, i
 	return (
 		<div className={styles.card}>
 			<div style={{ textAlign: "center" }}>
-				<img src={image} alt="Product Image" />
+				<img src={image} alt="Product Image" onClick={() => console.log(cart.quantity)} />
 			</div>
 			<h3>{title.split(" ").slice(0, 3).join(" ")}</h3>
 			<h5>{price} $</h5>
