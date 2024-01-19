@@ -1,18 +1,14 @@
+import CartCard from "../components/CartCard";
 import { useCart } from "../context/CartContext";
 
 export default function Cart() {
-	const [cart] = useCart();
+	const [cart, setCart] = useCart();
 	return (
-		<div>
+		<div className="">
+			<div>details</div>
 			<ul>
-				{Object.entries(cart.products).map((item) =>{
-					const {id , title, image , count} = item[1];
-					return (
-						<li className="" key={id}>
-							<h2>{title}</h2>
-							<h1>{count}</h1>
-						</li>
-					)
+				{Object.entries(cart.products).map((item, i) => {
+					return <CartCard key={i} item={item} />;
 				})}
 			</ul>
 		</div>
