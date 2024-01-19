@@ -16,7 +16,7 @@ export default function Header() {
 					dispatch({ type: "setQuery", payload: { name: "category", value: "all" } });
 				}}
 			>
-				<Link to="/">BotoShop</Link>
+				<Link to="/products">BotoShop</Link>
 			</h1>
 			<Link to="/cart">
 				<button>
