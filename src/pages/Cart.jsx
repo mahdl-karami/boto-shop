@@ -19,7 +19,7 @@ export default function Cart() {
 		<div className={styles.cart}>
 			<div className={styles.details}>
 				<div>
-					<BsCurrencyDollar /> Total : <p>133.4 $</p>
+					<BsCurrencyDollar /> Total : <p>{cart.total.toFixed(2)} $</p>
 				</div>
 				<div>
 					<FaSlackHash /> Quantity : <p>{cart.quantity}</p>

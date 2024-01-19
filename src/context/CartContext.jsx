@@ -4,6 +4,7 @@ const CartContext = React.createContext();
 
 const initialState = {
 	quantity: 0,
+	total: 0,
 	products: {},
 };
 const reducer = (state, { type, payload }) => {
@@ -14,6 +15,8 @@ const reducer = (state, { type, payload }) => {
 			return { ...state, products: { ...state.products, [payload.id]: payload.value } };
 		case "changeQuantity":
 			return { ...state, quantity: payload };
+		case "changeTotal":
+			return { ...state, total: payload };
 		// case "increase":
 		// 	console.log(state);
 		// 	console.log(payload);
@@ -26,8 +29,11 @@ const reducer = (state, { type, payload }) => {
 export default function CartContextProvider(props) {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	useEffect(() => {
-		const total = Object.entries(state.products).map((item) => item[1].count);
-		dispatch({ type: "changeQuantity", payload: total.reduce((partialSum, a) => partialSum + a, 0) });
+		const cartCoantity = Object.entries(state.products).map((item) => item[1].count);
+		const totalPrice = Object.entries(state.products).map((item) => item[1].price * item[1].count);
+		dispatch({ type: "changeQuantity", payload: cartCoantity.reduce((partialSum, a) => partialSum + a, 0) });
+		dispatch({type: "changeTotal" , payload: totalPrice.reduce((partialSum, a) => partialSum + a, 0)})
+		// dispatch({ type: "changeTotal", payload: totalPrice.reduce((partialSum, a) => partialSum + a, 0) });
 	}, [state.products, Object.keys(state.products).length]);
 	return <CartContext.Provider value={{ state, dispatch }}>{props.children}</CartContext.Provider>;
 }
