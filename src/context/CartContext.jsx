@@ -17,10 +17,6 @@ const reducer = (state, { type, payload }) => {
 			return { ...state, quantity: payload };
 		case "changeTotal":
 			return { ...state, total: payload };
-		// case "increase":
-		// 	console.log(state);
-		// 	console.log(payload);
-		// 	return [payload];
 		default:
 			console.log("Invalid Action");
 	}

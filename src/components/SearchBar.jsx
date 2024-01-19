@@ -12,13 +12,15 @@ export default function SearchBar() {
 		data: { search },
 		dispatch,
 	} = useShopContext();
-
+	const submitHandler=(e)=>{
+		e.preventDefault();
+	}
 	return (
-		<div className={styles.searchBar} style={{ margin: "2rem 0" }}>
+		<form className={styles.searchBar} style={{ margin: "2rem 0" }} onSubmit={submitHandler}>
 			<input placeholder="Search Here" value={search} onChange={({ target }) => dispatch({ type: "setSearch", payload: target.value })} />
 			<button onClick={() => dispatch({ type: "setQuery", payload: {name: "search" , value : search.toLowerCase()} })}>
 				<FiSearch />
 			</button>
-		</div>
+		</form>
 	);
 }
