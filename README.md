@@ -1,6 +1,6 @@
 # install app and runing by npm :
 > you must have already installed [node.js](https://nodejs.org/en)
-</br>
+<br>
 > this virsion has bug, visit [boto-shop-final]([http://localhost:3000/](https://github.com/mahdl-karami/boto-shop-final))
 ### 1" open app folder in terminal or cmd (package.json location)
 ### 2" run this command in terminal or cmd : `$ npm install ` (just first time do this)
